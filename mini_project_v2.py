@@ -123,10 +123,10 @@ with st.sidebar:
                 time, velocity = generate_radial_velocity_curve(K, orbital_period, time_span)
 
                 # Add the curve to the Plotly figure
-                fig.add_trace(go.Scatter(x=time, y=velocity, mode='lines', name=f'{planet_name} ({star_name})'))
+fig.add_trace(go.Scatter(x=time, y=velocity, mode='lines', name=f'{planet_name} ({star_name})'))
 
-            fig.update_layout(title='Radial Velocity Curves', xaxis_title='Time (days)', yaxis_title='Radial Velocity (m/s)')
-            st.plotly_chart(fig)
+fig.update_layout(title='Radial Velocity Curves', xaxis_title='Time (days)', yaxis_title='Radial Velocity (m/s)')
+st.plotly_chart(fig)
 
 with tab2:
     st.header("Planet Details")
