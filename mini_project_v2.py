@@ -95,6 +95,7 @@ with st.sidebar:
     max_period = st.slider('Select maximum orbital period (days)', min_value=min_period, max_value=float(df['pl_orbper'].max()), value=float(df['pl_orbper'].max()))
     # Slider for eccentricity
     eccentricity = st.slider('Eccentricity', min_value=0.0, max_value=1.0, step=0.01, value=0.0)
+    st.write("©Mrutyunjaya Muduli") 
 
     
 with tab1:
