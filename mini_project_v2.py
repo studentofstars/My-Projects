@@ -108,22 +108,22 @@ with tab1:
             # Slider for eccentricity
             eccentricity = st.slider('Eccentricity', min_value=0.0, max_value=1.0, step=0.01, value=0.0)
 
-        for index, planet in filtered_df.iterrows():
-            planet_name = planet['pl_name']
-            star_name = planet['hostname']
-            planet_mass = planet['pl_bmasse']
-            orbital_period = planet['pl_orbper']
-            star_mass = planet['st_mass']
+            for index, planet in filtered_df.iterrows():
+                planet_name = planet['pl_name']
+                star_name = planet['hostname']
+                planet_mass = planet['pl_bmasse']
+                orbital_period = planet['pl_orbper']
+                star_mass = planet['st_mass']
 
                 # Calculate radial velocity amplitude
-            K = calculate_radial_velocity(planet_mass, star_mass, orbital_period, eccentricity)
+                K = calculate_radial_velocity(planet_mass, star_mass, orbital_period, eccentricity)
 
                 # Generate radial velocity curve
-            time_span = orbital_period * 2
-            time, velocity = generate_radial_velocity_curve(K, orbital_period, time_span)
+                time_span = orbital_period * 2
+                time, velocity = generate_radial_velocity_curve(K, orbital_period, time_span)
 
                 # Add the curve to the Plotly figure
-            fig.add_trace(go.Scatter(x=time, y=velocity, mode='lines', name=f'{planet_name} ({star_name})'))
+                fig.add_trace(go.Scatter(x=time, y=velocity, mode='lines', name=f'{planet_name} ({star_name})'))
 
             fig.update_layout(title='Radial Velocity Curves', xaxis_title='Time (days)', yaxis_title='Radial Velocity (m/s)')
             st.plotly_chart(fig)
@@ -148,3 +148,5 @@ with tab4:
         df = fetch_exoplanet_data(limit=dataset_count)
         st.write("Data refreshed successfully!")
         st.dataframe(df[['pl_name', 'hostname', 'pl_bmasse', 'pl_orbper', 'pl_orbsmax', 'st_mass']])
+
+
