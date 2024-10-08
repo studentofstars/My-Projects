@@ -80,33 +80,33 @@ st.title("Exoplanet Detection Simulation")
 
 # Add tabs for different visualizations
 tab1, tab2, tab3, tab4 = st.tabs(["Radial Velocity Curves", "Planet Details", "3D Orbits", "Real-Time Data"])
-
-with tab1:
-    st.header("Radial Velocity Curves")
-
-    # Step 5: Interactive Filters for Planets and Stars
+#Sidebar for Tab 1
+with st.sidebar:
+    st.header("Adjust Filter Parameters")
     dataset_count = st.number_input('Enter the number of datasets to import:', min_value=1, max_value=10000, value=10)
 
     df = fetch_exoplanet_data(limit=dataset_count)
-
     if df is not None:
         df = df.dropna(subset=['pl_bmasse', 'pl_orbper', 'pl_orbsmax', 'pl_orbeccen', 'st_mass'])
+    # Filter options
+    min_mass = st.slider('Select minimum planet mass (Earth Masses)', min_value=float(df['pl_bmasse'].min()), max_value=float(df['pl_bmasse'].max()), value=float(df['pl_bmasse'].min()))
+    max_mass = st.slider('Select maximum planet mass (Earth Masses)', min_value=min_mass, max_value=float(df['pl_bmasse'].max()), value=float(df['pl_bmasse'].max()))
+    min_period = st.slider('Select minimum orbital period (days)', min_value=float(df['pl_orbper'].min()), max_value=float(df['pl_orbper'].max()), value=float(df['pl_orbper'].min()))
+    max_period = st.slider('Select maximum orbital period (days)', min_value=min_period, max_value=float(df['pl_orbper'].max()), value=float(df['pl_orbper'].max()))
+    # Slider for eccentricity
+    eccentricity = st.slider('Eccentricity', min_value=0.0, max_value=1.0, step=0.01, value=0.0)
 
-        # Filter options
-        min_mass = st.slider('Select minimum planet mass (Earth Masses)', min_value=float(df['pl_bmasse'].min()), max_value=float(df['pl_bmasse'].max()), value=float(df['pl_bmasse'].min()))
-        max_mass = st.slider('Select maximum planet mass (Earth Masses)', min_value=min_mass, max_value=float(df['pl_bmasse'].max()), value=float(df['pl_bmasse'].max()))
-        min_period = st.slider('Select minimum orbital period (days)', min_value=float(df['pl_orbper'].min()), max_value=float(df['pl_orbper'].max()), value=float(df['pl_orbper'].min()))
-        max_period = st.slider('Select maximum orbital period (days)', min_value=min_period, max_value=float(df['pl_orbper'].max()), value=float(df['pl_orbper'].max()))
+    
+with tab1:
+    st.header("Radial Velocity Curves")
 
+    if df is not None:
         filtered_df = df[(df['pl_bmasse'] >= min_mass) & (df['pl_bmasse'] <= max_mass) & (df['pl_orbper'] >= min_period) & (df['pl_orbper'] <= max_period)]
 
         if filtered_df.empty:
             st.write("No planets match your filters!")
         else:
             fig = go.Figure()
-
-            # Slider for eccentricity
-            eccentricity = st.slider('Eccentricity', min_value=0.0, max_value=1.0, step=0.01, value=0.0)
 
             for index, planet in filtered_df.iterrows():
                 planet_name = planet['pl_name']
