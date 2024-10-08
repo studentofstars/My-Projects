@@ -148,5 +148,6 @@ with tab4:
         df = fetch_exoplanet_data(limit=dataset_count)
         st.write("Data refreshed successfully!")
         st.dataframe(df[['pl_name', 'hostname', 'pl_bmasse', 'pl_orbper', 'pl_orbsmax', 'st_mass']])
+    st.video("https://youtu.be/9NaFu-wou8I?si=GBlFa1wQXZMW1IOP")    
 
 
