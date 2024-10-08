@@ -81,7 +81,7 @@ st.title("Exoplanet Detection Simulation")
 # Add tabs for different visualizations
 tab1, tab2, tab3, tab4 = st.tabs(["Radial Velocity Curves", "Planet Details", "3D Orbits", "Real-Time Data"])
 
-with tab1:
+with st.sidebar:
     st.header("Radial Velocity Curves")
 
     # Step 5: Interactive Filters for Planets and Stars
