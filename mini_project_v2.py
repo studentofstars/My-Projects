@@ -116,11 +116,11 @@ with tab1:
                 star_mass = planet['st_mass']
 
                 # Calculate radial velocity amplitude
-            K = calculate_radial_velocity(planet_mass, star_mass, orbital_period, eccentricity)
+                K = calculate_radial_velocity(planet_mass, star_mass, orbital_period, eccentricity)
 
                 # Generate radial velocity curve
-            time_span = orbital_period * 2
-            time, velocity = generate_radial_velocity_curve(K, orbital_period, time_span)
+                time_span = orbital_period * 2
+                time, velocity = generate_radial_velocity_curve(K, orbital_period, time_span)
 
                 # Add the curve to the Plotly figure
             fig.add_trace(go.Scatter(x=time, y=velocity, mode='lines', name=f'{planet_name} ({star_name})'))
