@@ -107,34 +107,11 @@ with tab1:
     The **Radial Velocity Method** is used to detect exoplanets by observing the wobble of stars due to gravitational pulls from orbiting planets. 
     This method helps determine important parameters such as the mass of the planet, its orbital period, and the distance from the star.
     The data for this graph is fetched directly from the NASA Exoplanet Archive in real time and is processed to generate the plots as shown.
+    The radial velocity curves represent the variations in the star's radial velocity caused by the gravitational influence of an orbiting exoplanet.
     """)
     st.subheader("Key Formulas Used")
     
-    # Formula for Radial Velocity Amplitude (K)
-    st.markdown("""
-    The radial velocity amplitude (K) can be calculated using the formula:
-    
-    $$K = \\frac{2 \\pi G}{P} \\cdot \\frac{M_p}{M_*^{2/3}} \\cdot \\frac{1}{\\sqrt{1 - e^2}}$$
-    
-    where:
-    - \(K\) = Radial velocity amplitude (m/s)
-    - \(G\) = Gravitational constant ($$(6.67430 \\cdot 10^{-11} \, m^3 \, kg^{-1} \, s^{-2})$$)
-    - \(P\) = Orbital period (in seconds)
-    - \(M_p\) = Mass of the planet (in kg)
-    - \(M_*\) = Mass of the star (in kg)
-    - \(e\) = Eccentricity of the orbit (dimensionless)
-    """)
-
-    # Explanation of each parameter
-    st.write("### Significance of Parameters:")
-    st.write("""
-    - **Radial Velocity Amplitude (K)**: Represents the maximum velocity of the star as it wobbles due to the gravitational influence of the planet.
-    - **Orbital Period (P)**: The time taken by the planet to complete one orbit around the star.
-    - **Mass of the Planet (M_p)**: The mass of the exoplanet, which influences the gravitational pull it exerts on the star.
-    - **Mass of the Star (M_*)**: The mass of the host star, which also affects the radial velocity measurements.
-    - **Eccentricity (e)**: A measure of how elliptical the orbit is, affecting the shape of the velocity curve.
-    """)
-
+   
     if df is not None:
         filtered_df = df[(df['pl_bmasse'] >= min_mass) & (df['pl_bmasse'] <= max_mass) & (df['pl_orbper'] >= min_period) & (df['pl_orbper'] <= max_period)]
 
@@ -162,6 +139,32 @@ with tab1:
 
             fig.update_layout(title='Radial Velocity Curves', xaxis_title='Time (days)', yaxis_title='Radial Velocity (m/s)')
             st.plotly_chart(fig)
+
+    # Formula for Radial Velocity Amplitude (K)
+    st.markdown("""
+    The radial velocity amplitude (K) can be calculated using the formula:
+    
+    $$K = \\frac{2 \\pi G}{P} \\cdot \\frac{M_p}{M_*^{2/3}} \\cdot \\frac{1}{\\sqrt{1 - e^2}}$$
+    
+    where:
+    - \(K\) = Radial velocity amplitude (m/s)
+    - \(G\) = Gravitational constant ($$(6.67430 \\cdot 10^{-11} \, m^3 \, kg^{-1} \, s^{-2})$$)
+    - \(P\) = Orbital period (in seconds)
+    - \(M_p\) = Mass of the planet (in kg)
+    - \(M_*\) = Mass of the star (in kg)
+    - \(e\) = Eccentricity of the orbit (dimensionless)
+    """)
+
+    # Explanation of each parameter
+    st.write("### Significance of Parameters:")
+    st.write("""
+    - **Radial Velocity Amplitude (K)**: Represents the maximum velocity of the star as it wobbles due to the gravitational influence of the planet.
+    - **Orbital Period (P)**: The time taken by the planet to complete one orbit around the star.
+    - **Mass of the Planet (M_p)**: The mass of the exoplanet, which influences the gravitational pull it exerts on the star.
+    - **Mass of the Star (M_*)**: The mass of the host star, which also affects the radial velocity measurements.
+    - **Eccentricity (e)**: A measure of how elliptical the orbit is, affecting the shape of the velocity curve.
+    """)
+
 
 with tab2:
     st.header("Planet Details")
