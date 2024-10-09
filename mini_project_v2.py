@@ -69,6 +69,25 @@ def calculate_radial_velocity(planet_mass, star_mass, orbital_period, eccentrici
     K = ((2 * np.pi * G_const) / orbital_period.value)**(1/3) * (planet_mass_kg) / (star_mass_kg**(2/3)) / np.sqrt(1 - eccentricity**2)
     return K  # in m/s
 
+# Function to generate a 3D planetary orbit
+def generate_3d_orbit(orbital_period, eccentricity, num_steps=100):
+    time = np.linspace(0, orbital_period, num_steps)
+    theta = 2 * np.pi * time / orbital_period  # Angular position in the orbit
+    r = 1 - eccentricity * np.cos(theta)  # Radial distance
+
+    # 3D coordinates for the orbit (semi-major axis = 1 AU)
+    x = r * np.cos(theta)
+    y = r * np.sin(theta)
+    z = np.zeros_like(x)  # Orbit lies in the x-y plane
+
+    return x, y, z, time
+
+# Function to simulate radial velocity animation in 3D
+def generate_3d_radial_velocity_animation(K, orbital_period, eccentricity, num_steps=100):
+    x, y, z, time = generate_3d_orbit(orbital_period, eccentricity, num_steps)
+    star_z = K * np.sin(2 * np.pi * time / orbital_period)
+    return x, y, z, star_z, time
+
 # Step 3: Generate Radial Velocity Curve
 def generate_radial_velocity_curve(K, P, time_span):
     time = np.linspace(0, time_span, 1000)  # Time points (days)
