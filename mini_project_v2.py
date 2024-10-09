@@ -191,11 +191,11 @@ with tab3:
         )
 
         st.plotly_chart(fig_3d)
-    #if df is not None:
-        #fig_3d = px.scatter_3d(df, x='pl_orbsmax', y='pl_orbper', z='pl_bmasse', color='pl_name',
-                               #labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
-        #fig_3d.update_layout(title="3D Visualization of Planetary Orbits")
-        #st.plotly_chart(fig_3d)
+    if df is not None:
+        fig_3d = px.scatter_3d(df, x='pl_orbsmax', y='pl_orbper', z='pl_bmasse', color='pl_name',
+                               labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
+        fig_3d.update_layout(title="3D Visualization of Planetary Orbits")
+        st.plotly_chart(fig_3d)
 
 with tab4:
     st.header("Real-Time Data Updates")
