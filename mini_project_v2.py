@@ -69,24 +69,6 @@ def calculate_radial_velocity(planet_mass, star_mass, orbital_period, eccentrici
     K = ((2 * np.pi * G_const) / orbital_period.value)**(1/3) * (planet_mass_kg) / (star_mass_kg**(2/3)) / np.sqrt(1 - eccentricity**2)
     return K  # in m/s
 
-# Function to generate a 3D planetary orbit
-def generate_3d_orbit(orbital_period, eccentricity, num_steps=100):
-    time = np.linspace(0, orbital_period, num_steps)
-    theta = 2 * np.pi * time / orbital_period  # Angular position in the orbit
-    r = 1 - eccentricity * np.cos(theta)  # Radial distance
-
-    # 3D coordinates for the orbit (semi-major axis = 1 AU)
-    x = r * np.cos(theta)
-    y = r * np.sin(theta)
-    z = np.zeros_like(x)  # Orbit lies in the x-y plane
-
-    return x, y, z, time
-
-# Function to simulate radial velocity animation in 3D
-def generate_3d_radial_velocity_animation(K, orbital_period, eccentricity, num_steps=100):
-    x, y, z, time = generate_3d_orbit(orbital_period, eccentricity, num_steps)
-    star_z = K * np.sin(2 * np.pi * time / orbital_period)
-    return x, y, z, star_z, time
 
 # Step 3: Generate Radial Velocity Curve
 def generate_radial_velocity_curve(K, P, time_span):
@@ -156,41 +138,7 @@ with tab2:
 
 with tab3:
     st.header("3D Visualization of Planetary Orbits")
-    # Sidebar sliders for controlling orbit parameters
-    st.write("Use the sidebar to adjust parameters for the animation.")
-
-    if df is not None:
-        planet_mass = np.mean(df['pl_bmasse'])
-        star_mass = np.mean(df['st_mass'])
-        orbital_period = np.mean(df['pl_orbper'])
-
-        # Calculate radial velocity amplitude (K)
-        K = calculate_radial_velocity(planet_mass, star_mass, orbital_period, eccentricity)
-
-        # Generate 3D radial velocity animation
-        x, y, z, star_z, time = generate_3d_radial_velocity_animation(K, orbital_period, eccentricity)
-
-        # Create 3D Plotly figure
-        fig_3d = go.Figure()
-
-        # Add the planet's orbit as a scatter plot in 3D
-        fig_3d.add_trace(go.Scatter3d(x=x, y=y, z=z, mode='lines', name='Planet Orbit', line=dict(color='blue', width=3)))
-
-        # Add the star's wobble as a scatter plot in 3D
-        fig_3d.add_trace(go.Scatter3d(x=[0]*len(star_z), y=[0]*len(star_z), z=star_z, mode='lines', name='Star Wobble', line=dict(color='red', width=3)))
-
-        # Update layout for 3D visualization
-        fig_3d.update_layout(
-            scene=dict(
-                xaxis_title="X (AU)",
-                yaxis_title="Y (AU)",
-                zaxis_title="Z (m/s)",
-                aspectratio=dict(x=1, y=1, z=0.5)
-            ),
-            title="3D Visualization of Orbit and Star Wobble"
-        )
-
-        st.plotly_chart(fig_3d)
+    
     if df is not None:
         fig_3d = px.scatter_3d(df, x='pl_orbsmax', y='pl_orbper', z='pl_bmasse', color='pl_name',
                                labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
