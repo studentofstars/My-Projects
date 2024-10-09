@@ -118,7 +118,7 @@ with tab1:
     
     where:
     - \(K\) = Radial velocity amplitude (m/s)
-    - \(G\) = Gravitational constant (\(6.67430 \times 10^{-11} \ m^3 \ kg^{-1} \ s^{-2}\))
+    - \(G\) = Gravitational constant ($$\(6.67430 \\cdot 10^{-11} \, m^3 \, kg^{-1} \, s^{-2}\)$$)
     - \(P\) = Orbital period (in seconds)
     - \(M_p\) = Mass of the planet (in kg)
     - \(M_*\) = Mass of the star (in kg)
