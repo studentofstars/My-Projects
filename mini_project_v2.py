@@ -137,11 +137,46 @@ with tab2:
 
 with tab3:
     st.header("3D Visualization of Planetary Orbits")
+    # Sidebar sliders for controlling orbit parameters
+    st.write("Use the sidebar to adjust parameters for the animation.")
+
     if df is not None:
-        fig_3d = px.scatter_3d(df, x='pl_orbsmax', y='pl_orbper', z='pl_bmasse', color='pl_name',
-                               labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
-        fig_3d.update_layout(title="3D Visualization of Planetary Orbits")
+        planet_mass = np.mean(df['pl_bmasse'])
+        star_mass = np.mean(df['st_mass'])
+        orbital_period = np.mean(df['pl_orbper'])
+
+        # Calculate radial velocity amplitude (K)
+        K = calculate_radial_velocity(planet_mass, star_mass, orbital_period, eccentricity)
+
+        # Generate 3D radial velocity animation
+        x, y, z, star_z, time = generate_3d_radial_velocity_animation(K, orbital_period, eccentricity)
+
+        # Create 3D Plotly figure
+        fig_3d = go.Figure()
+
+        # Add the planet's orbit as a scatter plot in 3D
+        fig_3d.add_trace(go.Scatter3d(x=x, y=y, z=z, mode='lines', name='Planet Orbit', line=dict(color='blue', width=3)))
+
+        # Add the star's wobble as a scatter plot in 3D
+        fig_3d.add_trace(go.Scatter3d(x=[0]*len(star_z), y=[0]*len(star_z), z=star_z, mode='lines', name='Star Wobble', line=dict(color='red', width=3)))
+
+        # Update layout for 3D visualization
+        fig_3d.update_layout(
+            scene=dict(
+                xaxis_title="X (AU)",
+                yaxis_title="Y (AU)",
+                zaxis_title="Z (m/s)",
+                aspectratio=dict(x=1, y=1, z=0.5)
+            ),
+            title="3D Visualization of Orbit and Star Wobble"
+        )
+
         st.plotly_chart(fig_3d)
+    #if df is not None:
+        #fig_3d = px.scatter_3d(df, x='pl_orbsmax', y='pl_orbper', z='pl_bmasse', color='pl_name',
+                               #labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
+        #fig_3d.update_layout(title="3D Visualization of Planetary Orbits")
+        #st.plotly_chart(fig_3d)
 
 with tab4:
     st.header("Real-Time Data Updates")
