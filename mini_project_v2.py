@@ -102,6 +102,39 @@ with st.sidebar:
 with tab1:
     st.header("Radial Velocity Curves")
 
+    # Brief explanation of the Radial Velocity Method
+    st.markdown("""
+    The **Radial Velocity Method** is used to detect exoplanets by observing the wobble of stars due to gravitational pulls from orbiting planets. 
+    This method helps determine important parameters such as the mass of the planet, its orbital period, and the distance from the star.
+    The data for this graph is fetched directly from the NASA Exoplanet Archive in real time and is processed to generate the plots as shown.
+    """)
+    st.subheader("Key Formulas Used")
+    
+    # Formula for Radial Velocity Amplitude (K)
+    st.markdown("""
+    The radial velocity amplitude (K) can be calculated using the formula:
+    
+    $$K = \\frac{2 \\pi G}{P} \\cdot \\frac{M_p}{M_*^{2/3}} \\cdot \\frac{1}{\\sqrt{1 - e^2}}$$
+    
+    where:
+    - \(K\) = Radial velocity amplitude (m/s)
+    - \(G\) = Gravitational constant (\(6.67430 \\times 10^{-11} \, m^3 \, kg^{-1} \, s^{-2}\))
+    - \(P\) = Orbital period (in seconds)
+    - \(M_p\) = Mass of the planet (in kg)
+    - \(M_*\) = Mass of the star (in kg)
+    - \(e\) = Eccentricity of the orbit (dimensionless)
+    """)
+
+    # Explanation of each parameter
+    st.write("### Significance of Parameters:")
+    st.write("""
+    - **Radial Velocity Amplitude (K)**: Represents the maximum velocity of the star as it wobbles due to the gravitational influence of the planet.
+    - **Orbital Period (P)**: The time taken by the planet to complete one orbit around the star.
+    - **Mass of the Planet (M_p)**: The mass of the exoplanet, which influences the gravitational pull it exerts on the star.
+    - **Mass of the Star (M_*)**: The mass of the host star, which also affects the radial velocity measurements.
+    - **Eccentricity (e)**: A measure of how elliptical the orbit is, affecting the shape of the velocity curve.
+    """)
+
     if df is not None:
         filtered_df = df[(df['pl_bmasse'] >= min_mass) & (df['pl_bmasse'] <= max_mass) & (df['pl_orbper'] >= min_period) & (df['pl_orbper'] <= max_period)]
 
@@ -132,12 +165,25 @@ with tab1:
 
 with tab2:
     st.header("Planet Details")
+    st.markdown("""
+    This section displays details about the exoplanets, including:
+    - **pl_name**: Name of the exoplanet
+    - **hostname**: Host star name
+    - **pl_bmasse**: Mass of the planet (in Earth masses)
+    - **pl_orbper**: Orbital period (in days)
+    - **pl_orbsmax**: Semi-major axis (in AU)
+    - **st_mass**: Mass of the host star (in Solar masses)
+    """)
     if df is not None:
         st.write("Displaying detailed information about planets:")
         st.dataframe(df[['pl_name', 'hostname', 'pl_bmasse', 'pl_orbper', 'pl_orbsmax', 'st_mass']])
 
 with tab3:
     st.header("3D Visualization of Planetary Orbits")
+    st.markdown("""
+    The 3D plot displays the relationship between the semi-major axis, orbital period, and planet mass of the detected exoplanets. 
+    This visualization helps in understanding how different planets interact with their host stars based on their distances and masses.
+    """)
     
     if df is not None:
         fig_3d = px.scatter_3d(df, x='pl_orbsmax', y='pl_orbper', z='pl_bmasse', color='pl_name',
@@ -147,6 +193,7 @@ with tab3:
 
 with tab4:
     st.header("Real-Time Data Updates")
+    st.markdown(""" The **Refresh Data** allows users to fetch the most up-to-date exoplanet data from the NASA Exoplanet Archive. """) 
     if st.button('Refresh Data'):
         df = fetch_exoplanet_data(limit=dataset_count)
         st.write("Data refreshed successfully!")
