@@ -201,6 +201,7 @@ with tab4:
         df = fetch_exoplanet_data(limit=dataset_count)
         st.write("Data refreshed successfully!")
         st.dataframe(df[['pl_name', 'hostname', 'pl_bmasse', 'pl_orbper', 'pl_orbsmax', 'st_mass']])
+    st.subheader (" Radial Velocity Method Explanation Video ")    
     st.video("https://youtu.be/rN7uuqLKv0I?si=L400cu8qcas3dVjU") 
     st.write("©Mrutyunjaya Muduli") 
         
