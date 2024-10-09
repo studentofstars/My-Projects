@@ -109,8 +109,6 @@ with tab1:
     The data for this graph is fetched directly from the NASA Exoplanet Archive in real time and is processed to generate the plots as shown.
     The radial velocity curves represent the variations in the star's radial velocity caused by the gravitational influence of an orbiting exoplanet.
     """)
-    st.subheader("Key Formulas Used")
-    
    
     if df is not None:
         filtered_df = df[(df['pl_bmasse'] >= min_mass) & (df['pl_bmasse'] <= max_mass) & (df['pl_orbper'] >= min_period) & (df['pl_orbper'] <= max_period)]
@@ -139,6 +137,8 @@ with tab1:
 
             fig.update_layout(title='Radial Velocity Curves', xaxis_title='Time (days)', yaxis_title='Radial Velocity (m/s)')
             st.plotly_chart(fig)
+
+    st.subheader("Key Formulas Used")
 
     # Formula for Radial Velocity Amplitude (K)
     st.markdown("""
