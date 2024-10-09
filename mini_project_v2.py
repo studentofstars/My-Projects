@@ -84,6 +84,7 @@ tab1, tab2, tab3, tab4 = st.tabs(["Radial Velocity Curves", "Planet Details", "3
 #Sidebar for Tab 1
 with st.sidebar:
     st.header("Adjust Filter Parameters")
+    st.markdown(" Set your parameters to filter out the curves ")
     dataset_count = st.number_input('Enter the number of datasets to import:', min_value=1, max_value=10000, value=10)
 
     df = fetch_exoplanet_data(limit=dataset_count)
@@ -100,7 +101,7 @@ with st.sidebar:
 
     
 with tab1:
-    st.header("Radial Velocity Curves")
+    st.header("Radial Velocity Method")
 
     # Brief explanation of the Radial Velocity Method
     st.markdown("""
@@ -191,7 +192,7 @@ with tab3:
     if df is not None:
         fig_3d = px.scatter_3d(df, x='pl_orbsmax', y='pl_orbper', z='pl_bmasse', color='pl_name',
                                labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
-        fig_3d.update_layout(title="3D Visualization of Planetary Orbits")
+        fig_3d.update_layout(title="Interactive visualization of Planetary Orbits")
         st.plotly_chart(fig_3d)
 
 with tab4:
