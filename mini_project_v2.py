@@ -184,7 +184,6 @@ with tab2:
 
 with tab3:
     st.header("3D Visualization of Planetary Orbits")
-    
     st.markdown("""
     The 3D plot displays the relationship between the semi-major axis, orbital period, and planet mass of the detected exoplanets. 
     This visualization helps in understanding how different planets interact with their host stars based on their distances and masses.
@@ -205,7 +204,7 @@ with tab4:
         st.dataframe(df[['pl_name', 'hostname', 'pl_bmasse', 'pl_orbper', 'pl_orbsmax', 'st_mass']])
     st.subheader (" Radial Velocity Method Explanation Video ")    
     st.video("https://youtu.be/rN7uuqLKv0I?si=L400cu8qcas3dVjU") 
-    st.write("©Mrutyunjaya Muduli") 
+    st.write("©Mrutyunjaya Muduli")
         
 
 
