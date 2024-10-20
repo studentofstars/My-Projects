@@ -15,11 +15,6 @@ import plotly.express as px
 import streamlit as st
 from astropy.constants import G
 from astropy import units as u
-from astropy.time import Time
-import matplotlib.pyplot as plt
-from poliastro.plotting.static import StaticOrbitPlotter
-from poliastro.bodies import Sun, Earth, Jupiter
-from poliastro.twobody import Orbit
 
 # Step 1: Fetch Exoplanet Data from NASA Exoplanet Archive
 @st.cache_data
@@ -189,43 +184,17 @@ with tab2:
 
 with tab3:
     st.header("3D Visualization of Planetary Orbits")
+    
     st.markdown("""
-    The 3D plot now simulates the stellar wobble due to the gravitational pull of orbiting planets. Choose a star from the dataset to visualize the simulation.
+    The 3D plot displays the relationship between the semi-major axis, orbital period, and planet mass of the detected exoplanets. 
+    This visualization helps in understanding how different planets interact with their host stars based on their distances and masses.
     """)
     
-    # Let the user select a star
-    selected_star = st.selectbox("Select a star to simulate", df['hostname'].unique())
-    
-    # Get the planet(s) around the selected star
-    star_planets = df[df['hostname'] == selected_star]
-    
-    # Check if there are planets for the selected star
-    if star_planets.empty:
-        st.write("No planets available for the selected star.")
-    else:
-        # Setting up simulation for each planet
-        fig, ax = plt.subplots()
-        plotter = StaticOrbitPlotter(ax)
-        
-        for _, planet in star_planets.iterrows():
-            # Define the orbit of the planet (we use the semi-major axis and orbital period)
-            planet_orbit = Orbit.from_classical(Sun, planet['pl_orbsmax'] * u.AU, 0 * u.one, 0 * u.deg, 0 * u.deg, 0 * u.deg, Time.now().tdb)
-            
-            # Plot planet's orbit
-            plotter.plot(planet_orbit, label=planet['pl_name'])
-        
-        # Display plot
-        st.pyplot(fig)
-    #st.markdown("""
-    #The 3D plot displays the relationship between the semi-major axis, orbital period, and planet mass of the detected exoplanets. 
-    #This visualization helps in understanding how different planets interact with their host stars based on their distances and masses.
-    #""")
-    
-    #if df is not None:
-        #fig_3d = px.scatter_3d(df, x='pl_orbsmax', y='pl_orbper', z='pl_bmasse', color='pl_name',
-                               #labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
-        #fig_3d.update_layout(title="Interactive visualization of Planetary Orbits")
-        #st.plotly_chart(fig_3d)
+    if df is not None:
+        fig_3d = px.scatter_3d(df, x='pl_orbsmax', y='pl_orbper', z='pl_bmasse', color='pl_name',
+                               labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
+        fig_3d.update_layout(title="Interactive visualization of Planetary Orbits")
+        st.plotly_chart(fig_3d)
 
 with tab4:
     st.header("Real-Time Data Updates")
