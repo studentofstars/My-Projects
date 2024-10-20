@@ -5,3 +5,4 @@ plotly
 requests
 astropy==5.2
 pip==24.2
+astropy --prefer-binary
