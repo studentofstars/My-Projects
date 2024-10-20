@@ -15,6 +15,9 @@ import plotly.express as px
 import streamlit as st
 from astropy.constants import G
 from astropy import units as u
+from astropy.time import Time
+import matplotlib.pyplot as plt
+from poliastro.plotting.static import StaticOrbitPlotter
 from poliastro.bodies import Sun, Earth, Jupiter
 from poliastro.twobody import Orbit
 
