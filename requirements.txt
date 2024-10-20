@@ -3,5 +3,5 @@ pandas
 numpy
 plotly
 requests
-astropy
-poliastro
+astropy==5.2
+pip==24.2
