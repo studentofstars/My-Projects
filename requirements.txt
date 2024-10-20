@@ -1,8 +1,8 @@
-streamlit
-pandas
-numpy
-plotly
-requests
+setuptools>=65.5.1
+--prefer-binary
+streamlit==1.39.0
+pandas==2.2.3
+numpy==2.1.2
+plotly==5.24.1
+requests==2.32.3
 astropy==5.2
-pip==24.2
-astropy --prefer-binary
