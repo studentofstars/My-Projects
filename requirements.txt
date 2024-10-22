@@ -1,5 +1,4 @@
-setuptools>=65.5.1
---prefer-binary
+setuptools==69.5.1
 streamlit==1.39.0
 pandas==2.2.3
 numpy==2.1.2
