@@ -15,10 +15,7 @@ import plotly.express as px
 import streamlit as st
 from astropy.constants import G
 from astropy import units as u
-from poliastro.bodies import Sun, Earth
-from poliastro.twobody import Orbit
-from poliastro.plotting.plotly import PlotlyOrbit
-from datetime import datetime
+
 
 
 
@@ -81,33 +78,6 @@ def generate_radial_velocity_curve(K, P, time_span):
     time = np.linspace(0, time_span, 1000)  # Time points (days)
     velocity = K * np.sin(2 * np.pi * time / P)  # Radial velocity at each time point
     return time, velocity
-#Create a function to generate star wobble simulation
-def plot_star_wobble(selected_star):
-    if df is not None:
-        selected_planets = df[df['hostname'] == selected_star]
-
-        # Create a plotly figure for 3D simulation
-        fig = go.Figure()
-
-        for index, planet in selected_planets.iterrows():
-            planet_name = planet['pl_name']
-            a = planet['pl_orbsmax'] * u.AU  # Semi-major axis
-            ecc = planet['pl_orbeccen']  # Eccentricity
-            inc = 0 * u.deg  # Inclination
-
-            orb = Orbit.from_classical(Sun, a, ecc, inc, 0 * u.deg, 0 * u.deg, 0 * u.deg)
-            plotter = PlotlyOrbit(orb, label=planet_name)
-            fig.add_traces(plotter.plot())
-
-        fig.update_layout(title=f'Star Wobble Simulation for {selected_star}', scene=dict(
-                xaxis_title='x (AU)',
-                yaxis_title='y (AU)',
-                zaxis_title='z (AU)',
-            ))
-
-        st.plotly_chart(fig)
-    else:
-        st.write("No data available.")
 
 
 # Step 5: Streamlit App Setup
@@ -224,14 +194,12 @@ with tab3:
     """)
     
     
-    #if df is not None:
-        #fig_3d = px.scatter_3d(df, x='pl_orbsmax', y='pl_orbper', z='pl_bmasse', color='pl_name',
-                                #labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
-        #fig_3d.update_layout(title="Interactive visualization of Planetary Orbits")
-        #st.plotly_chart(fig_3d)
-    star_names = df['hostname'].unique()
-    selected_star = st.selectbox("Select a star", star_names)
-    plot_star_wobble(selected_star)
+    if df is not None:
+        fig_3d = px.scatter_3d(df, x='pl_orbsmax', y='pl_orbper', z='pl_bmasse', color='pl_name',
+                                labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
+        fig_3d.update_layout(title="Interactive visualization of Planetary Orbits")
+        st.plotly_chart(fig_3d)
+    
             
 with tab4:
     st.header("Real-Time Data Updates")
