@@ -237,16 +237,16 @@ with tab4:
         r_{outer} = \\sqrt{\\frac{L}{S_{eff,sun}(1) + a(1) \\cdot (T_{star} - T_{sun}) + b(1) \\cdot (T_{star} - T_{sun})^2 + c(1) \\cdot (T_{star} - T_{sun})^3}} 
         $$
         
-       **Variables used**: 
+    3. **Variables used**: 
         - `star_teff`: Effective temperature of the star. 
         - `T_sun`: Effective temperature of the sun (5778 K). 
         - `L`: Luminosity of the star in terms of solar luminosity. 
         - `S_eff_sun`: Effective stellar flux at the inner and outer edges of the HZ. 
         - `a, b, c`: Coefficients for the polynomial expression.
         
-    3. **Identifying Exoplanets in the Habitable Zone**: 
+    4. **Identifying Exoplanets in the Habitable Zone**: 
         The semi-major axis (`pl_orbsmax`) of each exoplanet is compared against the calculated HZ boundaries to determine if it lies within the HZ.
-    4. **Visualization**: A 3D scatter plot visualizes the exoplanets within their respective habitable zones, showing the relationship between the HZ boundaries and the exoplanet's orbital distance. 
+    5. **Visualization**: A 3D scatter plot visualizes the exoplanets within their respective habitable zones, showing the relationship between the HZ boundaries and the exoplanet's orbital distance. 
     """)
     df = fetch_exoplanet_data(limit=dataset_count) 
     if df is not None:
