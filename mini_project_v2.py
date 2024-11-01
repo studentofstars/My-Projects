@@ -216,6 +216,29 @@ with tab3:
         st.plotly_chart(fig_3d)
         
 with tab4:
+    st.header("Habitable Zone Analysis")
+    st.markdown(""" ## Habitable Zone Analysis This tab identifies and analyzes exoplanets that lie within the habitable zones (HZ) of their respective stars.
+    The HZ, also known as the "Goldilocks zone," is the region around a star where conditions may be just right for liquid water to exist on a planet's surface—crucial for life as we know it.
+    
+    ### Steps and Calculations
+    1. **Data Fetching**: The data is fetched from the NASA Exoplanet Archive and includes parameters such as planet mass, orbital period, semi-major axis, stellar mass, and effective temperature. 
+    2. **Habitable Zone Calculation**: The inner and outer boundaries of the HZ are calculated based on the star's effective temperature (`st_teff`). 
+        The luminosity (`L`) of the star is calculated as: 
+        $$ 
+        L = \\left( \\frac{T_{star}}{T_{sun}} \\right)^4 
+        $$ 
+        Using the luminosity, the inner (`r_{inner}`) and outer (`r_{outer}`) boundaries of the HZ are given by: 
+        $$ 
+        r_{inner} = \\sqrt{\\frac{L}{S_{eff,sun}(0) + a(0) \\cdot (T_{star} - T_{sun}) + b(0) \\cdot (T_{star} - T_{sun})^2 + c(0) \\cdot (T_{star} - T_{sun})^3}}
+        $$ 
+        
+        $$
+        r_{outer} = \\sqrt{\\frac{L}{S_{eff,sun}(1) + a(1) \\cdot (T_{star} - T_{sun}) + b(1) \\cdot (T_{star} - T_{sun})^2 + c(1) \\cdot (T_{star} - T_{sun})^3}} 
+        $$
+    3. **Identifying Exoplanets in the Habitable Zone**: 
+        The semi-major axis (`pl_orbsmax`) of each exoplanet is compared against the calculated HZ boundaries to determine if it lies within the HZ.
+    4. **Visualization**: A 3D scatter plot visualizes the exoplanets within their respective habitable zones, showing the relationship between the HZ boundaries and the exoplanet's orbital distance. 
+    """)
     df = fetch_exoplanet_data(limit=dataset_count) 
     if df is not None:
          
