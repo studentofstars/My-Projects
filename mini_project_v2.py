@@ -216,7 +216,7 @@ with tab3:
         st.plotly_chart(fig_3d)
         
 with tab4:
-    df = fetch_exoplanet_data(limit=1000) 
+    df = fetch_exoplanet_data(limit=dataset_count) 
     if df is not None:
          
         # Calculate Habitable Zone for each star
