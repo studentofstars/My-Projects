@@ -32,6 +32,8 @@ def fetch_exoplanet_data(limit=10000):
         pl_orbsmax,
         pl_orbeccen,
         st_mass
+        st_teff,
+        pl_rade
     FROM
         ps
     WHERE
