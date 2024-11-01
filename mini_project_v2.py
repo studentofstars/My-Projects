@@ -78,13 +78,26 @@ def generate_radial_velocity_curve(K, P, time_span):
     time = np.linspace(0, time_span, 1000)  # Time points (days)
     velocity = K * np.sin(2 * np.pi * time / P)  # Radial velocity at each time point
     return time, velocity
+#Step 4: Calculate habitable zone
+def calculate_habitable_zone(star_teff): # Constants for habitable zone calculation (Kopparapu et al. 2014) 
+    S_eff_sun = np.array([1.776, 0.320]) 
+    a = np.array([0.013, 0.094]) 
+    b = np.array([2.04e-4, 1.73e-4]) 
+    c = np.array([-2.89e-8, -5.44e-9]) 
+    T_star = star_teff # Effective temperature of the star 
+    T_sun = 5778 # Effective temperature of the sun 
+    L = (star_teff / T_sun)**4 # Luminosity of the star in terms of solar luminosity
+    # Calculate the inner and outer boundaries of the habitable zone 
+    r_inner = np.sqrt(L / (S_eff_sun[0] + a[0] * (T_star - T_sun) + b[0] * (T_star - T_sun)**2 + c[0] * (T_star - T_sun)**3))
+    r_outer = np.sqrt(L / (S_eff_sun[1] + a[1] * (T_star - T_sun) + b[1] * (T_star - T_sun)**2 + c[1] * (T_star - T_sun)**3)) 
+    return r_inner, r_outer
 
 
 # Step 5: Streamlit App Setup
 st.title("Exoplanet Detection Simulation")
 
 # Add tabs for different visualizations
-tab1, tab2, tab3, tab4 = st.tabs(["Radial Velocity Curves", "Planet Details", "3D Orbits", "Real-Time Data"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Radial Velocity Curves", "Planet Details", "3D Orbits", "Habitable Zone Calculation", "Real-Time Data"])
 #Sidebar for Tab 1
 with st.sidebar:
     st.header("Adjust Filter Parameters")
@@ -199,9 +212,29 @@ with tab3:
                                 labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
         fig_3d.update_layout(title="Interactive visualization of Planetary Orbits")
         st.plotly_chart(fig_3d)
+        
+with tab4:
+    df = fetch_exoplanet_data(limit=1000) 
+    if df is not None:
+        df = df.dropna(subset=['pl_bmasse', 'pl_orbper', 'pl_orbsmax', 'st_mass', 'st_teff']) 
+    # Calculate Habitable Zone for each star
+    habitable_zones = df['st_teff'].apply(calculate_habitable_zone)
+    df['hz_inner'] = habitable_zones.apply(lambda x: x[0]) 
+    df['hz_outer'] = habitable_zones.apply(lambda x: x[1])
+    # Identify Exoplanets within the Habitable Zone 
+    df['in_hz'] = df.apply(lambda row: row['hz_inner'] <= row['pl_orbsmax'] <= row['hz_outer'], axis=1) 
+    # Filter Exoplanets in the Habitable Zone
+    habitable_exoplanets = df[df['in_hz']]
+    st.subheader("Exoplanets within the Habitable Zone") 
+    st.write(habitable_exoplanets[['pl_name', 'hostname', 'pl_orbsmax', 'hz_inner', 'hz_outer']])
+    # 3D Scatter Plot of Exoplanets within the Habitable Zone 
+    fig = px.scatter_3d(habitable_exoplanets, x='hz_inner', y='hz_outer', z='pl_orbsmax', color='pl_name', 
+                        labels={'hz_inner': 'HZ Inner Boundary (AU)', 'hz_outer': 'HZ Outer Boundary (AU)', 'pl_orbsmax': 'Orbital Distance (AU)'}, 
+                        title='Exoplanets within the Habitable Zone') 
+    st.plotly_chart(fig)
     
             
-with tab4:
+with tab5:
     st.header("Real-Time Data Updates")
     st.markdown(""" The **Refresh Data** allows users to fetch the most up-to-date exoplanet data from the NASA Exoplanet Archive. """) 
     if st.button('Refresh Data'):
