@@ -217,7 +217,7 @@ with tab3:
         
 with tab4:
     st.header("Habitable Zone Analysis")
-    st.markdown(""" ## Habitable Zone Analysis This tab identifies and analyzes exoplanets that lie within the habitable zones (HZ) of their respective stars.
+    st.markdown(""" ## This tab identifies and analyzes exoplanets that lie within the habitable zones (HZ) of their respective stars.
     The HZ, also known as the "Goldilocks zone," is the region around a star where conditions may be just right for liquid water to exist on a planet's surface—crucial for life as we know it.
     
     ### Steps and Calculations
