@@ -200,6 +200,7 @@ with tab2:
     if df is not None:
         st.write("Displaying detailed information about planets:")
         st.dataframe(df[['pl_name', 'hostname', 'pl_bmasse', 'pl_orbper', 'pl_orbsmax', 'st_mass']])
+    
 
 with tab3:
     st.header("3D Visualization of Planetary Orbits")
@@ -259,6 +260,7 @@ with tab4:
         st.plotly_chart(fig)
     st.subheader ("Habitable Zone Explanation Video")    
     st.video("https://youtu.be/J04YN9azln8?si=zIwLiVz7FeMRIxAl") 
+    st.markdown("[Reference Paper for the analysis method](https://arxiv.org/pdf/2408.09296)"} 
             
 with tab5:
     st.header("Real-Time Data Updates")
@@ -269,6 +271,7 @@ with tab5:
         st.dataframe(df[['pl_name', 'hostname', 'pl_bmasse', 'pl_orbper', 'pl_orbsmax', 'st_mass']])
     st.subheader (" Radial Velocity Method Explanation Video ")    
     st.video("https://youtu.be/rN7uuqLKv0I?si=L400cu8qcas3dVjU") 
+    st.markdown("[Reference Paper for the project](https://arxiv.org/pdf/2404.09143)"}   
 
         
 
