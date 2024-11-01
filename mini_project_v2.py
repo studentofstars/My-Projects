@@ -218,22 +218,22 @@ with tab3:
 with tab4:
     df = fetch_exoplanet_data(limit=1000) 
     if df is not None:
-        df = df.dropna(subset=['pl_bmasse', 'pl_orbper', 'pl_orbsmax', 'st_mass', 'st_teff']) 
-    # Calculate Habitable Zone for each star
-    habitable_zones = df['st_teff'].apply(calculate_habitable_zone)
-    df['hz_inner'] = habitable_zones.apply(lambda x: x[0]) 
-    df['hz_outer'] = habitable_zones.apply(lambda x: x[1])
-    # Identify Exoplanets within the Habitable Zone 
-    df['in_hz'] = df.apply(lambda row: row['hz_inner'] <= row['pl_orbsmax'] <= row['hz_outer'], axis=1) 
-    # Filter Exoplanets in the Habitable Zone
-    habitable_exoplanets = df[df['in_hz']]
-    st.subheader("Exoplanets within the Habitable Zone") 
-    st.write(habitable_exoplanets[['pl_name', 'hostname', 'pl_orbsmax', 'hz_inner', 'hz_outer']])
-    # 3D Scatter Plot of Exoplanets within the Habitable Zone 
-    fig = px.scatter_3d(habitable_exoplanets, x='hz_inner', y='hz_outer', z='pl_orbsmax', color='pl_name', 
+         
+        # Calculate Habitable Zone for each star
+        habitable_zones = df['st_teff'].apply(calculate_habitable_zone)
+        df['hz_inner'] = habitable_zones.apply(lambda x: x[0]) 
+        df['hz_outer'] = habitable_zones.apply(lambda x: x[1])
+        # Identify Exoplanets within the Habitable Zone 
+        df['in_hz'] = df.apply(lambda row: row['hz_inner'] <= row['pl_orbsmax'] <= row['hz_outer'], axis=1) 
+        # Filter Exoplanets in the Habitable Zone
+        habitable_exoplanets = df[df['in_hz']]
+        st.subheader("Exoplanets within the Habitable Zone") 
+        st.write(habitable_exoplanets[['pl_name', 'hostname', 'pl_orbsmax', 'hz_inner', 'hz_outer']])
+        # 3D Scatter Plot of Exoplanets within the Habitable Zone 
+        fig = px.scatter_3d(habitable_exoplanets, x='hz_inner', y='hz_outer', z='pl_orbsmax', color='pl_name', 
                         labels={'hz_inner': 'HZ Inner Boundary (AU)', 'hz_outer': 'HZ Outer Boundary (AU)', 'pl_orbsmax': 'Orbital Distance (AU)'}, 
                         title='Exoplanets within the Habitable Zone') 
-    st.plotly_chart(fig)
+        st.plotly_chart(fig)
     
             
 with tab5:
