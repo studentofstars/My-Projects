@@ -116,7 +116,7 @@ with st.sidebar:
     max_period = st.slider('Select maximum orbital period (days)', min_value=min_period, max_value=float(df['pl_orbper'].max()), value=float(df['pl_orbper'].max()))
     # Slider for eccentricity
     eccentricity = st.slider('Eccentricity', min_value=0.0, max_value=1.0, step=0.01, value=0.0)
-    st.write("©Mrutyunjaya Muduli") 
+  
 
     
 with tab1:
@@ -257,7 +257,8 @@ with tab4:
                         labels={'hz_inner': 'HZ Inner Boundary (AU)', 'hz_outer': 'HZ Outer Boundary (AU)', 'pl_orbsmax': 'Orbital Distance (AU)'}, 
                         title='Exoplanets within the Habitable Zone') 
         st.plotly_chart(fig)
-    
+    st.subheader ("Habitable Zone Explanation Video")    
+    st.video("https://youtu.be/J04YN9azln8?si=zIwLiVz7FeMRIxAl") 
             
 with tab5:
     st.header("Real-Time Data Updates")
@@ -268,7 +269,7 @@ with tab5:
         st.dataframe(df[['pl_name', 'hostname', 'pl_bmasse', 'pl_orbper', 'pl_orbsmax', 'st_mass']])
     st.subheader (" Radial Velocity Method Explanation Video ")    
     st.video("https://youtu.be/rN7uuqLKv0I?si=L400cu8qcas3dVjU") 
-    st.write("©Mrutyunjaya Muduli")
+
         
 
 
