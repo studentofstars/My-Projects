@@ -268,7 +268,7 @@ with tab4:
         st.plotly_chart(fig)
     st.subheader ("Habitable Zone Explanation Video")    
     st.video("https://youtu.be/J04YN9azln8?si=zIwLiVz7FeMRIxAl") 
-    st.markdown("[Reference Paper for the analysis method](https://arxiv.org/pdf/2408.09296)")
+    st.markdown("[Reference Paper for the analysis method](https://iopscience.iop.org/article/10.1088/2041-8205/787/2/L29/pdf)")
             
 with tab5:
     st.header("Real-Time Data Updates")
