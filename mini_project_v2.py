@@ -215,6 +215,7 @@ with tab3:
                                 labels={'pl_orbsmax': 'Semi-major Axis (AU)', 'pl_orbper': 'Orbital Period (days)', 'pl_bmasse': 'Planet Mass (Earth Masses)'})
         fig_3d.update_layout(title="Interactive visualization of Planetary Orbits")
         st.plotly_chart(fig_3d)
+    st.markdown("Refer the link for an interactive visualisation: [EYES ON EXOPLANETS](https://eyes.nasa.gov/apps/exo/#/?browse_destination=Detection_Method)")   
         
 with tab4:
     st.header("Habitable Zone Analysis")
