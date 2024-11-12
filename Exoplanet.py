@@ -18,7 +18,7 @@ import streamlit as st
 from astropy.constants import G
 from astropy import units as u
 import googlegenerativeai
-API_KEY = "AIzaSyD6L0F5QW8qx8jTOn1Hl2kWWkUvcEaXp90"
+API_KEY = "ANTHROPIC_API_KEY"
 genai.configure(api_key=API_KEY)
 
 # Step 1: Fetch Exoplanet Data from NASA Exoplanet Archive
