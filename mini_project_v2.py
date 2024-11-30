@@ -17,7 +17,21 @@ from astropy.constants import G
 from astropy import units as u
 
 
+# CSS for background image
+page_bg_img = '''
+<style>
+.stApp {
+    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Faasnova.org%2F2021%2F07%2F06%2Fhow-do-you-find-the-surface-of-an-exoplanet-ask-its-atmosphere%2F&psig=AOvVaw26u7hfyAQkFVYF_JfqourV&ust=1733047374938000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKCqyOXmg4oDFQAAAAAdAAAAABAE");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+</style>
+'''
 
+# Inject CSS into the app
+st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Step 1: Fetch Exoplanet Data from NASA Exoplanet Archive
 @st.cache_data
