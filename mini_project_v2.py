@@ -18,11 +18,11 @@ from astropy.constants import G
 from astropy import units as u
 
 # Add this function to set the background image
-def set_background_image("https://github.com/studentofstars/My-Projects/blob/main/k218b-scaled.jpg"):
+def set_background_image(image_url):
     page_bg_img = f'''
     <style>
     body {{
-        background-image: url("https://github.com/studentofstars/My-Projects/blob/main/k218b-scaled.jpg");
+        background-image: url("{image_url}");
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
