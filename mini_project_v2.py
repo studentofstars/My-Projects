@@ -22,7 +22,7 @@ def set_background_image( https://github.com/studentofstars/My-Projects/blob/mai
     page_bg_img = f'''
     <style>
     body {{
-        background-image: url(" https://github.com/studentofstars/My-Projects/blob/main/k218b-scaled.jpg");
+        background-image: url("https://github.com/studentofstars/My-Projects/blob/main/k218b-scaled.jpg");
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -32,7 +32,7 @@ def set_background_image( https://github.com/studentofstars/My-Projects/blob/mai
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Set the background image
-set_background_image(" https://github.com/studentofstars/My-Projects/blob/main/k218b-scaled.jpg")
+set_background_image("https://github.com/studentofstars/My-Projects/blob/main/k218b-scaled.jpg")
 
 
 # Step 1: Fetch Exoplanet Data from NASA Exoplanet Archive
