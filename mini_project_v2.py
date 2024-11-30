@@ -17,22 +17,7 @@ import streamlit as st
 from astropy.constants import G
 from astropy import units as u
 
-# Add this function to set the background image
-def set_background_image(image_url):
-    page_bg_img = f'''
-    <style>
-    body {{
-        background-image: url("{image_url}");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }}
-    </style>
-    '''
-    st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# Set the background image
-set_background_image("https://github.com/studentofstars/My-Projects/blob/main/k218b-scaled.jpg")
 
 
 # Step 1: Fetch Exoplanet Data from NASA Exoplanet Archive
@@ -73,6 +58,24 @@ def fetch_exoplanet_data(limit=10000):
     else:
         st.error("Error fetching data from NASA Exoplanet Archive.")
         return None
+
+# Add this function to set the background image
+def set_background_image(image_url):
+    page_bg_img = f'''
+    <style>
+    body {{
+        background-image: url("{image_url}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }}
+    </style>
+    '''
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
+# Set the background image
+set_background_image("https://github.com/studentofstars/My-Projects/blob/main/k218b-scaled.jpg")
+
 
 # Step 2: Calculate Radial Velocity Amplitude (K)
 def calculate_radial_velocity(planet_mass, star_mass, orbital_period, eccentricity=0):
