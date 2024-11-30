@@ -21,7 +21,7 @@ from astropy import units as u
 page_bg_img = '''
 <style>
 .stApp {
-    background-image: url("{https://www.google.com/url?sa=i&url=https%3A%2F%2Faasnova.org%2F2021%2F07%2F06%2Fhow-do-you-find-the-surface-of-an-exoplanet-ask-its-atmosphere%2F&psig=AOvVaw26u7hfyAQkFVYF_JfqourV&ust=1733047374938000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKCqyOXmg4oDFQAAAAAdAAAAABAE}");
+    background-image: url("https://github.com/studentofstars/My-Projects/blob/main/k218b-scaled.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
