@@ -118,7 +118,7 @@ with st.sidebar:
     max_period = st.slider('Select maximum orbital period (days)', min_value=min_period, max_value=float(df['pl_orbper'].max()), value=float(df['pl_orbper'].max()))
     # Slider for eccentricity
     eccentricity = st.slider('Eccentricity', min_value=0.0, max_value=1.0, step=0.01, value=0.0)
-  
+    st.markdown("Explore more in the [Exoplanets ML App](https://exoplanetsml.streamlit.app/).")
 
     
 with tab1:
@@ -283,7 +283,7 @@ with tab5:
     st.subheader (" Radial Velocity Method Explanation Video ")    
     st.video("https://youtu.be/rN7uuqLKv0I?si=L400cu8qcas3dVjU") 
     st.markdown("[Reference Paper for the project](https://arxiv.org/pdf/2404.09143)") 
-    st.markdown("Explore more in the [Exoplanets ML App](https://exoplanetsml.streamlit.app/).")
+    
 
         
 
