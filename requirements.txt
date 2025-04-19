@@ -8,4 +8,4 @@ json
 streamlit_lottie
 scikit-learn
 pip>=23.0
-plotly>=5.0.0
+plotly
