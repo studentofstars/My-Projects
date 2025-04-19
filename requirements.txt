@@ -6,5 +6,6 @@ setuptools_scm
 setuptools==69.5.1
 json
 streamlit_lottie
-sklearn
-plotly
+scikit-learn
+pip>=23.0
+plotly>=5.0.0
