@@ -283,6 +283,7 @@ with tab5:
     st.subheader (" Radial Velocity Method Explanation Video ")    
     st.video("https://youtu.be/rN7uuqLKv0I?si=L400cu8qcas3dVjU") 
     st.markdown("[Reference Paper for the project](https://arxiv.org/pdf/2404.09143)") 
+    st.markdown("Explore more in the [Exoplanets ML App](https://exoplanetsml.streamlit.app/).")
 
         
 
